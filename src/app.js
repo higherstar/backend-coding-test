@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/order
+const logger = require('./utils/logger');
+
 const express = require('express');
 
 const app = express();
@@ -88,7 +91,8 @@ module.exports = (db) => {
   });
 
   app.get('/rides', (req, res) => {
-    db.all('SELECT * FROM Rides', (err, rows) => {
+    const offset = (req.query.page - 1) * 10;
+    db.all(`SELECT * FROM Rides LIMIT ${offset},10`, (err, rows) => {
       if (err) {
         return res.send({
           error_code: 'SERVER_ERROR',

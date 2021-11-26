@@ -20,4 +20,4 @@ const logger = winston.createLogger({
 logger.log('info', 'created log file');
 logger.error(new Error('error as info'));
 
-export default logger;
+module.exports = logger;
